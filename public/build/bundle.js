@@ -369,12 +369,12 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[6] = list[i];
+    	child_ctx[9] = list[i];
     	child_ctx[8] = i;
     	return child_ctx;
     }
 
-    // (38:12) {:else}
+    // (60:12) {:else}
     function create_else_block(ctx) {
     	let p;
 
@@ -382,7 +382,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "Start Writing.";
-    			add_location(p, file, 38, 16, 963);
+    			add_location(p, file, 60, 16, 1864);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -397,51 +397,15 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(38:12) {:else}",
+    		source: "(60:12) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (34:62) 
+    // (54:62) 
     function create_if_block_1(ctx) {
-    	let ul;
-    	let li;
-
-    	const block = {
-    		c: function create() {
-    			ul = element("ul");
-    			li = element("li");
-    			li.textContent = "Not found";
-    			attr_dev(li, "class", "svelte-8w3djz");
-    			add_location(li, file, 35, 16, 890);
-    			attr_dev(ul, "class", "svelte-8w3djz");
-    			add_location(ul, file, 34, 6, 869);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, ul, anchor);
-    			append_dev(ul, li);
-    		},
-    		p: noop,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(ul);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block_1.name,
-    		type: "if",
-    		source: "(34:62) ",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (28:3) {#if inputText != undefined && inputText != "" && autocompletion != []}
-    function create_if_block(ctx) {
     	let ul;
     	let each_value = /*autocompletion*/ ctx[2];
     	validate_each_argument(each_value);
@@ -459,8 +423,8 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(ul, "class", "svelte-8w3djz");
-    			add_location(ul, file, 28, 12, 675);
+    			attr_dev(ul, "class", "svelte-1u4wao8");
+    			add_location(ul, file, 54, 16, 1640);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, ul, anchor);
@@ -502,33 +466,69 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block.name,
+    		id: create_if_block_1.name,
     		type: "if",
-    		source: "(28:3) {#if inputText != undefined && inputText != \\\"\\\" && autocompletion != []}",
+    		source: "(54:62) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (30:4) {#each autocompletion as match, i}
+    // (50:12) {#if inputText.length > 0 && autocompletion.length < 1}
+    function create_if_block(ctx) {
+    	let ul;
+    	let li;
+
+    	const block = {
+    		c: function create() {
+    			ul = element("ul");
+    			li = element("li");
+    			li.textContent = "Not found";
+    			attr_dev(li, "class", "svelte-1u4wao8");
+    			add_location(li, file, 51, 20, 1520);
+    			attr_dev(ul, "class", "svelte-1u4wao8");
+    			add_location(ul, file, 50, 17, 1495);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, ul, anchor);
+    			append_dev(ul, li);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(ul);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(50:12) {#if inputText.length > 0 && autocompletion.length < 1}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (56:20) {#each autocompletion as match, i}
     function create_each_block(ctx) {
     	let li;
-    	let t_value = /*match*/ ctx[6] + "";
+    	let t_value = /*match*/ ctx[9] + "";
     	let t;
     	let mounted;
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[5](/*match*/ ctx[6]);
+    		return /*click_handler*/ ctx[7](/*match*/ ctx[9]);
     	}
 
     	const block = {
     		c: function create() {
     			li = element("li");
     			t = text(t_value);
-    			attr_dev(li, "class", "svelte-8w3djz");
-    			add_location(li, file, 30, 6, 725);
+    			attr_dev(li, "class", "svelte-1u4wao8");
+    			add_location(li, file, 56, 24, 1724);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -541,7 +541,7 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty & /*autocompletion*/ 4 && t_value !== (t_value = /*match*/ ctx[6] + "")) set_data_dev(t, t_value);
+    			if (dirty & /*autocompletion*/ 4 && t_value !== (t_value = /*match*/ ctx[9] + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
@@ -554,7 +554,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(30:4) {#each autocompletion as match, i}",
+    		source: "(56:20) {#each autocompletion as match, i}",
     		ctx
     	});
 
@@ -563,18 +563,21 @@ var app = (function () {
 
     function create_fragment(ctx) {
     	let body;
+    	let p;
+    	let t0;
+    	let t1;
     	let div1;
     	let input;
-    	let t0;
+    	let t2;
     	let div0;
-    	let t1;
+    	let t3;
     	let br;
     	let mounted;
     	let dispose;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*inputText*/ ctx[0] != undefined && /*inputText*/ ctx[0] != "" && /*autocompletion*/ ctx[2] != []) return create_if_block;
-    		if (/*autocompletion*/ ctx[2] == [] && /*inputText*/ ctx[0] != "") return create_if_block_1;
+    		if (/*inputText*/ ctx[0].length > 0 && /*autocompletion*/ ctx[2].length < 1) return create_if_block;
+    		if (/*inputText*/ ctx[0] != "" && /*autocompletion*/ ctx[2] != []) return create_if_block_1;
     		return create_else_block;
     	}
 
@@ -584,43 +587,56 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			body = element("body");
+    			p = element("p");
+    			t0 = text(/*inputTextCandidate*/ ctx[3]);
+    			t1 = space();
     			div1 = element("div");
     			input = element("input");
-    			t0 = space();
+    			t2 = space();
     			div0 = element("div");
     			if_block.c();
-    			t1 = space();
+    			t3 = space();
     			br = element("br");
+    			add_location(p, file, 45, 4, 1257);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", /*placeholder*/ ctx[1]);
-    			add_location(input, file, 25, 2, 504);
-    			attr_dev(div0, "class", "sugestion svelte-8w3djz");
-    			add_location(div0, file, 26, 3, 564);
-    			attr_dev(div1, "class", "container svelte-8w3djz");
-    			add_location(div1, file, 24, 1, 478);
-    			add_location(br, file, 42, 1, 1023);
-    			add_location(body, file, 23, 0, 470);
+    			add_location(input, file, 47, 8, 1321);
+    			attr_dev(div0, "class", "sugestion svelte-1u4wao8");
+    			add_location(div0, file, 48, 8, 1386);
+    			attr_dev(div1, "class", "container svelte-1u4wao8");
+    			add_location(div1, file, 46, 4, 1289);
+    			add_location(br, file, 64, 4, 1935);
+    			add_location(body, file, 44, 0, 1246);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, body, anchor);
+    			append_dev(body, p);
+    			append_dev(p, t0);
+    			append_dev(body, t1);
     			append_dev(body, div1);
     			append_dev(div1, input);
     			set_input_value(input, /*inputText*/ ctx[0]);
-    			append_dev(div1, t0);
+    			append_dev(div1, t2);
     			append_dev(div1, div0);
     			if_block.m(div0, null);
-    			append_dev(body, t1);
+    			append_dev(body, t3);
     			append_dev(body, br);
 
     			if (!mounted) {
-    				dispose = listen_dev(input, "input", /*input_input_handler*/ ctx[4]);
+    				dispose = [
+    					listen_dev(window, "keydown", /*handleKey*/ ctx[4], false, false, false),
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[6])
+    				];
+
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
+    			if (dirty & /*inputTextCandidate*/ 8) set_data_dev(t0, /*inputTextCandidate*/ ctx[3]);
+
     			if (dirty & /*placeholder*/ 2) {
     				attr_dev(input, "placeholder", /*placeholder*/ ctx[1]);
     			}
@@ -647,7 +663,7 @@ var app = (function () {
     			if (detaching) detach_dev(body);
     			if_block.d();
     			mounted = false;
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -669,6 +685,27 @@ var app = (function () {
     	let autocompletion = [];
     	let { inputText = "" } = $$props;
     	let { arrayToSearch = [] } = $$props;
+    	let i = 0;
+    	let inputTextCandidate = "";
+
+    	function handleKey() {
+    		if (autocompletion.length > 0) {
+    			if (event.key == "ArrowUp") {
+    				$$invalidate(3, inputTextCandidate = autocompletion[i]);
+    				i -= 1;
+    			} else if (event.key == "ArrowDown") {
+    				$$invalidate(3, inputTextCandidate = autocompletion[i]);
+    				i += 1;
+    			} else if (event.keyCode == 13) {
+    				if (inputTextCandidate != undefined && inputTextCandidate != "") {
+    					$$invalidate(0, inputText = inputTextCandidate);
+    				}
+    			}
+
+    			return handleKey;
+    		}
+    	}
+
     	const writable_props = ["placeholder", "inputText", "arrayToSearch"];
 
     	Object.keys($$props).forEach(key => {
@@ -685,21 +722,26 @@ var app = (function () {
     	$$self.$$set = $$props => {
     		if ("placeholder" in $$props) $$invalidate(1, placeholder = $$props.placeholder);
     		if ("inputText" in $$props) $$invalidate(0, inputText = $$props.inputText);
-    		if ("arrayToSearch" in $$props) $$invalidate(3, arrayToSearch = $$props.arrayToSearch);
+    		if ("arrayToSearch" in $$props) $$invalidate(5, arrayToSearch = $$props.arrayToSearch);
     	};
 
     	$$self.$capture_state = () => ({
     		placeholder,
     		autocompletion,
     		inputText,
-    		arrayToSearch
+    		arrayToSearch,
+    		i,
+    		inputTextCandidate,
+    		handleKey
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("placeholder" in $$props) $$invalidate(1, placeholder = $$props.placeholder);
     		if ("autocompletion" in $$props) $$invalidate(2, autocompletion = $$props.autocompletion);
     		if ("inputText" in $$props) $$invalidate(0, inputText = $$props.inputText);
-    		if ("arrayToSearch" in $$props) $$invalidate(3, arrayToSearch = $$props.arrayToSearch);
+    		if ("arrayToSearch" in $$props) $$invalidate(5, arrayToSearch = $$props.arrayToSearch);
+    		if ("i" in $$props) i = $$props.i;
+    		if ("inputTextCandidate" in $$props) $$invalidate(3, inputTextCandidate = $$props.inputTextCandidate);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -707,7 +749,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*inputText, arrayToSearch, autocompletion*/ 13) {
+    		if ($$self.$$.dirty & /*inputText, arrayToSearch, autocompletion*/ 37) {
     			 if (inputText != undefined && inputText != "") {
     				$$invalidate(2, autocompletion = []);
     				arrayToSearch.forEach(checkAndAdd);
@@ -728,6 +770,8 @@ var app = (function () {
     		inputText,
     		placeholder,
     		autocompletion,
+    		inputTextCandidate,
+    		handleKey,
     		arrayToSearch,
     		input_input_handler,
     		click_handler
@@ -741,7 +785,7 @@ var app = (function () {
     		init(this, options, instance, create_fragment, safe_not_equal, {
     			placeholder: 1,
     			inputText: 0,
-    			arrayToSearch: 3
+    			arrayToSearch: 5
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {

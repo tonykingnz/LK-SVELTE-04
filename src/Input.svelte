@@ -47,20 +47,20 @@
     <div class="container">
         <input type="text" bind:value={inputText} {placeholder}>
         <div class="sugestion">
-            {#if inputText != undefined && inputText != "" && autocompletion != []}
-            <ul>
-                {#each autocompletion as match, i}
-                <li on:click="{() => inputText = match}">{match}</li>
-                {/each}
-            </ul>
-            {:else if autocompletion == [] && inputText != ""}
-            <ul>
-                <li>Not found</li>
-            </ul>
+            {#if inputText.length > 0 && autocompletion.length < 1}
+                 <ul>
+                    <li>Not found</li>
+                </ul>
+            {:else if inputText != "" && autocompletion != []}
+                <ul>
+                    {#each autocompletion as match, i}
+                        <li on:click="{() => inputText = match}">{match}</li>
+                    {/each}
+                </ul>
             {:else}
-            <p>Start Writing.</p>
+                <p>Start Writing.</p>
             {/if}
-        </div>
+        </div> 
     </div>
     <br>
 </body>
