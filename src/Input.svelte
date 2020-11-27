@@ -24,29 +24,29 @@
 <body>
 	<div class="container">
 		<input type="text" bind:value={inputText} {placeholder}>
-  	<div class="sugestion">
+  		<div class="sugestion">
 			{#if inputText != undefined && inputText != "" && autocompletion != []}
-            <ul>
-				{#each autocompletion as match, i}
- 					<li on:click="{() => inputText = match}">{match}</li>
-				{/each}
-			</ul>
-            {:else if autocompletion == [] && inputText != ""}
-		    <ul>
-                <li>Not found</li>
-            </ul>
-            {:else}
-                <p>Start Writing.</p>
-            {/if}
+				<ul>
+					{#each autocompletion as match, i}
+ 						<li on:click="{() => inputText = match}">{match}</li>
+					{/each}
+				</ul>
+            		{:else if autocompletion == [] && inputText != ""}
+				<ul>
+                			<li>Not found</li>
+            			</ul>
+            		{:else}
+                		<p>Start Writing.</p>
+            		{/if}
 		</div>
-   </div>
+   	</div>
 	<br>
 </body>
 
 <style>
 	ul {
 		top: 100%;
-    left: 0;
+		left: 0;
 		width: 100%;
 		background-color: #eaeaea;
 		border-color: #a5a5a5;
@@ -54,15 +54,17 @@
 		border-style: solid;
 		border-radius: 10px;
 	}
-  li {
-    cursor: pointer;
-  }
+	
+	li {
+		cursor: pointer;
+  	}
+	
 	.container{
-  	position: relative;
-  }
-  .sugestion{
-    top: 18px;
-	z-index : 99;
-  	position: absolute;
-   }
+  		position: relative;
+  	}
+  	.sugestion{
+    		top: 18px;
+		z-index : 99;
+		position: absolute;
+	}
 </style>
