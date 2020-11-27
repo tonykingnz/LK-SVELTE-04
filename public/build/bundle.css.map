@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "Input.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n\texport let placeholder = \"Write here\";\n\t\n\tlet autocompletion = [];\n\texport let inputText = \"\";\n\texport let arrayToSearch = [];\n\t\n\t$: if (inputText != undefined && inputText != \"\"){\n\t\tautocompletion = [];\n\t\t\n\t\tarrayToSearch.forEach(checkAndAdd);\n\t\tfunction checkAndAdd(item){\n\t\t\tif (item.toUpperCase().includes(inputText.toUpperCase())){\n\t\t\t\tautocompletion = [...autocompletion, item];\n\t\t\t}\n\t\t}\n\t}else {\n        debugger;\n\t\tautocompletion = [];\n\t}\n\t\n</script>\n\n<body>\n\t<div class=\"container\">\n\t\t<input type=\"text\" bind:value={inputText} {placeholder}>\n  \t<div class=\"sugestion\">\n\t\t\t{#if inputText != undefined && inputText != \"\" && autocompletion != []}\n            <ul>\n\t\t\t\t{#each autocompletion as match, i}\n \t\t\t\t\t<li on:click=\"{() => inputText = match}\">{match}</li>\n\t\t\t\t{/each}\n\t\t\t</ul>\n            {:else if autocompletion == [] && inputText != \"\"}\n\t\t    <ul>\n                <li>Not found</li>\n            </ul>\n            {:else}\n                <p>Start Writing.</p>\n            {/if}\n\t\t</div>\n   </div>\n\t<br>\n</body>\n\n<style>\n\tul {\n\t\ttop: 100%;\n    left: 0;\n\t\twidth: 100%;\n\t\tbackground-color: #eaeaea;\n\t\tborder-color: #a5a5a5;\n\t\tborder-color: 10px;\n\t\tborder-style: solid;\n\t\tborder-radius: 10px;\n\t}\n  li {\n    cursor: pointer;\n  }\n\t.container{\n  \tposition: relative;\n  }\n  .sugestion{\n    top: 18px;\n\tz-index : 99;\n  \tposition: absolute;\n   }\n</style>\n"
+  ],
+  "names": [],
+  "mappings": "AA8CC,EAAE,cAAC,CAAC,AACH,GAAG,CAAE,IAAI,CACP,IAAI,CAAE,CAAC,CACT,KAAK,CAAE,IAAI,CACX,gBAAgB,CAAE,OAAO,CACzB,YAAY,CAAE,OAAO,CACrB,YAAY,CAAE,IAAI,CAClB,YAAY,CAAE,KAAK,CACnB,aAAa,CAAE,IAAI,AACpB,CAAC,AACA,EAAE,cAAC,CAAC,AACF,MAAM,CAAE,OAAO,AACjB,CAAC,AACF,wBAAU,CAAC,AACT,QAAQ,CAAE,QAAQ,AACnB,CAAC,AACD,wBAAU,CAAC,AACT,GAAG,CAAE,IAAI,CACZ,OAAO,CAAG,EAAE,CACV,QAAQ,CAAE,QAAQ,AAClB,CAAC"
+}
