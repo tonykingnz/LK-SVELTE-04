@@ -5,3 +5,4 @@ let storeName=["Apple", "Amazon", "Google", "Facebook", "Lederek", "Microsoft", 
 </script>
 
 <Input arrayToSearch={storeName} {inputText}/>
+

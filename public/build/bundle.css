@@ -1,3 +1,4 @@
-ul.svelte-1u4wao8{top:100%;left:0;width:100%;background-color:#eaeaea;border-color:#a5a5a5;border-color:10px;border-style:solid;border-radius:10px}li.svelte-1u4wao8{cursor:pointer}.container.svelte-1u4wao8{position:relative}.sugestion.svelte-1u4wao8{top:18px;z-index:99;position:absolute}
+.scroll.svelte-1gf14k{background-color:#fed9ff;width:150px;height:150px;overflow-x:hidden;overflow-y:auto;text-align:center;padding:20px}
+ul.svelte-1r7em5{background-color:#eaeaea;border-color:#a5a5a5;border:2.5px;border-style:solid;border-radius:10px;width:180px;height:120px;overflow-x:hidden;overflow-y:auto;text-align:left}p.svelte-1r7em5{text-align:left;border:none;color:#567987}li.svelte-1r7em5{cursor:pointer}.container.svelte-1r7em5{position:relative}.sugestion.svelte-1r7em5{top:18px;z-index:99;position:absolute}
 
 /*# sourceMappingURL=bundle.css.map */

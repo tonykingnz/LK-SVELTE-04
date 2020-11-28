@@ -5,19 +5,20 @@
     	export let inputText = "";
     	export let arrayToSearch = [];
     	
-    	$: if (inputText != undefined && inputText != ""){
-    		autocompletion = [];
-    		
-    		arrayToSearch.forEach(checkAndAdd);
-    		function checkAndAdd(item){
-    			if (item.toUpperCase().includes(inputText.toUpperCase())){
-    				autocompletion = [...autocompletion, item];
-    			}
-    		}
-    	}else {
-            debugger;
-    		autocompletion = [];
-    	}
+        setInterval(function() {
+            if (inputText != undefined && inputText != "") {
+                autocompletion = [];
+
+                arrayToSearch.forEach(checkAndAdd);
+                function checkAndAdd(item) {
+                    if (item.toUpperCase().includes(inputText.toUpperCase())) {
+                        autocompletion = [...autocompletion, item];
+                    }
+                }
+            } else {
+                autocompletion = [];
+            }
+        }, 500);
         
         let i = 0;
     	let inputTextCandidate = autocompletion[0];
@@ -43,22 +44,26 @@
 </script>
 
 <body>
-    <p>{inputTextCandidate}</p>
     <div class="container">
         <input type="text" bind:value={inputText} {placeholder}>
         <div class="sugestion">
             {#if inputText.length > 0 && autocompletion.length < 1}
                  <ul>
-                    <li>Not found</li>
+                     <p>Not found</p>
                 </ul>
             {:else if inputText != "" && autocompletion != []}
                 <ul>
+                    {#if inputTextCandidate != undefined}
+                        <p>Press enter to select: {inputTextCandidate}</p>
+                    {:else}
+                        <p>Use the arrows keys to find in the sugestions.</p>
+                    {/if}
                     {#each autocompletion as match, i}
                         <li on:click="{() => inputText = match}">{match}</li>
                     {/each}
                 </ul>
             {:else}
-                <p>Start Writing.</p>
+                <h5>Start Writing.</h5>
             {/if}
         </div> 
     </div>
@@ -69,18 +74,25 @@
 
 <style>
     ul {
-    		top: 100%;
-        left: 0;
-    		width: 100%;
-    		background-color: #eaeaea;
-    		border-color: #a5a5a5;
-    		border-color: 10px;
-    		border-style: solid;
-    		border-radius: 10px;
-    	}
-      li {
+		background-color: #eaeaea;
+        border-color: #a5a5a5;
+    	border: 2.5px;
+		border-style: solid;
+        border-radius: 10px;
+    	width: 180px;
+        height: 120px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align: left;
+    }
+    p {
+        text-align: left;
+        border: none;
+        color: #567987;
+    }
+    li {
         cursor: pointer;
-      }
+    }
     	.container{
       	position: relative;
       }

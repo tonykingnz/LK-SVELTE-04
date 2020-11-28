@@ -374,30 +374,30 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (60:12) {:else}
-    function create_else_block(ctx) {
-    	let p;
+    // (65:12) {:else}
+    function create_else_block_1(ctx) {
+    	let h5;
 
     	const block = {
     		c: function create() {
-    			p = element("p");
-    			p.textContent = "Start Writing.";
-    			add_location(p, file, 60, 16, 1993);
+    			h5 = element("h5");
+    			h5.textContent = "Start Writing.";
+    			add_location(h5, file, 65, 16, 2361);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, p, anchor);
+    			insert_dev(target, h5, anchor);
     		},
     		p: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p);
+    			if (detaching) detach_dev(h5);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block.name,
+    		id: create_else_block_1.name,
     		type: "else",
-    		source: "(60:12) {:else}",
+    		source: "(65:12) {:else}",
     		ctx
     	});
 
@@ -407,6 +407,15 @@ var app = (function () {
     // (54:62) 
     function create_if_block_1(ctx) {
     	let ul;
+    	let t;
+
+    	function select_block_type_1(ctx, dirty) {
+    		if (/*inputTextCandidate*/ ctx[3] != undefined) return create_if_block_2;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type_1(ctx);
+    	let if_block = current_block_type(ctx);
     	let each_value = /*autocompletion*/ ctx[2];
     	validate_each_argument(each_value);
     	let each_blocks = [];
@@ -418,22 +427,38 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			ul = element("ul");
+    			if_block.c();
+    			t = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(ul, "class", "svelte-1u4wao8");
-    			add_location(ul, file, 54, 16, 1769);
+    			attr_dev(ul, "class", "svelte-1r7em5");
+    			add_location(ul, file, 54, 16, 1872);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, ul, anchor);
+    			if_block.m(ul, null);
+    			append_dev(ul, t);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(ul, null);
     			}
     		},
     		p: function update(ctx, dirty) {
+    			if (current_block_type === (current_block_type = select_block_type_1(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(ul, t);
+    				}
+    			}
+
     			if (dirty & /*inputText, autocompletion*/ 5) {
     				each_value = /*autocompletion*/ ctx[2];
     				validate_each_argument(each_value);
@@ -460,6 +485,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(ul);
+    			if_block.d();
     			destroy_each(each_blocks, detaching);
     		}
     	};
@@ -478,21 +504,21 @@ var app = (function () {
     // (50:12) {#if inputText.length > 0 && autocompletion.length < 1}
     function create_if_block(ctx) {
     	let ul;
-    	let li;
+    	let p;
 
     	const block = {
     		c: function create() {
     			ul = element("ul");
-    			li = element("li");
-    			li.textContent = "Not found";
-    			attr_dev(li, "class", "svelte-1u4wao8");
-    			add_location(li, file, 51, 20, 1649);
-    			attr_dev(ul, "class", "svelte-1u4wao8");
-    			add_location(ul, file, 50, 17, 1624);
+    			p = element("p");
+    			p.textContent = "Not found";
+    			attr_dev(p, "class", "svelte-1r7em5");
+    			add_location(p, file, 51, 21, 1754);
+    			attr_dev(ul, "class", "svelte-1r7em5");
+    			add_location(ul, file, 50, 17, 1728);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, ul, anchor);
-    			append_dev(ul, li);
+    			append_dev(ul, p);
     		},
     		p: noop,
     		d: function destroy(detaching) {
@@ -511,7 +537,76 @@ var app = (function () {
     	return block;
     }
 
-    // (56:20) {#each autocompletion as match, i}
+    // (58:20) {:else}
+    function create_else_block(ctx) {
+    	let p;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "Use the arrows keys to find in the sugestions.";
+    			attr_dev(p, "class", "svelte-1r7em5");
+    			add_location(p, file, 58, 24, 2062);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(58:20) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (56:20) {#if inputTextCandidate != undefined}
+    function create_if_block_2(ctx) {
+    	let p;
+    	let t0;
+    	let t1;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t0 = text("Press enter to select: ");
+    			t1 = text(/*inputTextCandidate*/ ctx[3]);
+    			attr_dev(p, "class", "svelte-1r7em5");
+    			add_location(p, file, 56, 24, 1959);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t0);
+    			append_dev(p, t1);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*inputTextCandidate*/ 8) set_data_dev(t1, /*inputTextCandidate*/ ctx[3]);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(56:20) {#if inputTextCandidate != undefined}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (61:20) {#each autocompletion as match, i}
     function create_each_block(ctx) {
     	let li;
     	let t_value = /*match*/ ctx[9] + "";
@@ -527,8 +622,8 @@ var app = (function () {
     		c: function create() {
     			li = element("li");
     			t = text(t_value);
-    			attr_dev(li, "class", "svelte-1u4wao8");
-    			add_location(li, file, 56, 24, 1853);
+    			attr_dev(li, "class", "svelte-1r7em5");
+    			add_location(li, file, 61, 24, 2221);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -554,7 +649,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(56:20) {#each autocompletion as match, i}",
+    		source: "(61:20) {#each autocompletion as match, i}",
     		ctx
     	});
 
@@ -563,14 +658,11 @@ var app = (function () {
 
     function create_fragment(ctx) {
     	let body;
-    	let p;
-    	let t0;
-    	let t1;
     	let div1;
     	let input;
-    	let t2;
+    	let t0;
     	let div0;
-    	let t3;
+    	let t1;
     	let br;
     	let mounted;
     	let dispose;
@@ -578,7 +670,7 @@ var app = (function () {
     	function select_block_type(ctx, dirty) {
     		if (/*inputText*/ ctx[0].length > 0 && /*autocompletion*/ ctx[2].length < 1) return create_if_block;
     		if (/*inputText*/ ctx[0] != "" && /*autocompletion*/ ctx[2] != []) return create_if_block_1;
-    		return create_else_block;
+    		return create_else_block_1;
     	}
 
     	let current_block_type = select_block_type(ctx);
@@ -587,42 +679,35 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			body = element("body");
-    			p = element("p");
-    			t0 = text(/*inputTextCandidate*/ ctx[3]);
-    			t1 = space();
     			div1 = element("div");
     			input = element("input");
-    			t2 = space();
+    			t0 = space();
     			div0 = element("div");
     			if_block.c();
-    			t3 = space();
+    			t1 = space();
     			br = element("br");
-    			add_location(p, file, 45, 4, 1386);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", /*placeholder*/ ctx[1]);
-    			add_location(input, file, 47, 8, 1450);
-    			attr_dev(div0, "class", "sugestion svelte-1u4wao8");
-    			add_location(div0, file, 48, 8, 1515);
-    			attr_dev(div1, "class", "container svelte-1u4wao8");
-    			add_location(div1, file, 46, 4, 1418);
-    			add_location(br, file, 64, 4, 2064);
-    			add_location(body, file, 44, 0, 1375);
+    			add_location(input, file, 47, 8, 1554);
+    			attr_dev(div0, "class", "sugestion svelte-1r7em5");
+    			add_location(div0, file, 48, 8, 1619);
+    			attr_dev(div1, "class", "container svelte-1r7em5");
+    			add_location(div1, file, 46, 4, 1522);
+    			add_location(br, file, 69, 4, 2434);
+    			add_location(body, file, 45, 0, 1511);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, body, anchor);
-    			append_dev(body, p);
-    			append_dev(p, t0);
-    			append_dev(body, t1);
     			append_dev(body, div1);
     			append_dev(div1, input);
     			set_input_value(input, /*inputText*/ ctx[0]);
-    			append_dev(div1, t2);
+    			append_dev(div1, t0);
     			append_dev(div1, div0);
     			if_block.m(div0, null);
-    			append_dev(body, t3);
+    			append_dev(body, t1);
     			append_dev(body, br);
 
     			if (!mounted) {
@@ -635,8 +720,6 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*inputTextCandidate*/ 8) set_data_dev(t0, /*inputTextCandidate*/ ctx[3]);
-
     			if (dirty & /*placeholder*/ 2) {
     				attr_dev(input, "placeholder", /*placeholder*/ ctx[1]);
     			}
@@ -685,6 +768,25 @@ var app = (function () {
     	let autocompletion = [];
     	let { inputText = "" } = $$props;
     	let { arrayToSearch = [] } = $$props;
+
+    	setInterval(
+    		function () {
+    			if (inputText != undefined && inputText != "") {
+    				$$invalidate(2, autocompletion = []);
+    				arrayToSearch.forEach(checkAndAdd);
+
+    				function checkAndAdd(item) {
+    					if (item.toUpperCase().includes(inputText.toUpperCase())) {
+    						$$invalidate(2, autocompletion = [...autocompletion, item]);
+    					}
+    				}
+    			} else {
+    				$$invalidate(2, autocompletion = []);
+    			}
+    		},
+    		500
+    	);
+
     	let i = 0;
     	let inputTextCandidate = autocompletion[0];
 
@@ -747,24 +849,6 @@ var app = (function () {
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
-
-    	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*inputText, arrayToSearch, autocompletion*/ 37) {
-    			 if (inputText != undefined && inputText != "") {
-    				$$invalidate(2, autocompletion = []);
-    				arrayToSearch.forEach(checkAndAdd);
-
-    				function checkAndAdd(item) {
-    					if (item.toUpperCase().includes(inputText.toUpperCase())) {
-    						$$invalidate(2, autocompletion = [...autocompletion, item]);
-    					}
-    				}
-    			} else {
-    				debugger;
-    				$$invalidate(2, autocompletion = []);
-    			}
-    		}
-    	};
 
     	return [
     		inputText,
