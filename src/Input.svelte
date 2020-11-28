@@ -20,15 +20,15 @@
     	}
         
         let i = 0;
-        let inputTextCandidate = "";
-    	
+    	let inputTextCandidate = autocompletion[0];
+        
         function handleKey() {
     	    if (autocompletion.length > 0) {
-    	        if (event.key == "ArrowUp") {
+                if (event.key == "ArrowUp" && inputTextCandidate != autocompletion[0])  {
     		        inputTextCandidate = autocompletion[i];
     			    i -= 1;
                 }
-    		    else if (event.key == "ArrowDown") {
+    		    else if (event.key == "ArrowDown" && inputTextCandidate != autocompletion[autocompletion.length - 1]) {
                     inputTextCandidate = autocompletion[i];
     			    i += 1;
                 }

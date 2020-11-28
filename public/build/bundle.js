@@ -382,7 +382,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "Start Writing.";
-    			add_location(p, file, 60, 16, 1864);
+    			add_location(p, file, 60, 16, 1993);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -424,7 +424,7 @@ var app = (function () {
     			}
 
     			attr_dev(ul, "class", "svelte-1u4wao8");
-    			add_location(ul, file, 54, 16, 1640);
+    			add_location(ul, file, 54, 16, 1769);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, ul, anchor);
@@ -486,9 +486,9 @@ var app = (function () {
     			li = element("li");
     			li.textContent = "Not found";
     			attr_dev(li, "class", "svelte-1u4wao8");
-    			add_location(li, file, 51, 20, 1520);
+    			add_location(li, file, 51, 20, 1649);
     			attr_dev(ul, "class", "svelte-1u4wao8");
-    			add_location(ul, file, 50, 17, 1495);
+    			add_location(ul, file, 50, 17, 1624);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, ul, anchor);
@@ -528,7 +528,7 @@ var app = (function () {
     			li = element("li");
     			t = text(t_value);
     			attr_dev(li, "class", "svelte-1u4wao8");
-    			add_location(li, file, 56, 24, 1724);
+    			add_location(li, file, 56, 24, 1853);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -597,16 +597,16 @@ var app = (function () {
     			if_block.c();
     			t3 = space();
     			br = element("br");
-    			add_location(p, file, 45, 4, 1257);
+    			add_location(p, file, 45, 4, 1386);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "placeholder", /*placeholder*/ ctx[1]);
-    			add_location(input, file, 47, 8, 1321);
+    			add_location(input, file, 47, 8, 1450);
     			attr_dev(div0, "class", "sugestion svelte-1u4wao8");
-    			add_location(div0, file, 48, 8, 1386);
+    			add_location(div0, file, 48, 8, 1515);
     			attr_dev(div1, "class", "container svelte-1u4wao8");
-    			add_location(div1, file, 46, 4, 1289);
-    			add_location(br, file, 64, 4, 1935);
-    			add_location(body, file, 44, 0, 1246);
+    			add_location(div1, file, 46, 4, 1418);
+    			add_location(br, file, 64, 4, 2064);
+    			add_location(body, file, 44, 0, 1375);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -686,14 +686,14 @@ var app = (function () {
     	let { inputText = "" } = $$props;
     	let { arrayToSearch = [] } = $$props;
     	let i = 0;
-    	let inputTextCandidate = "";
+    	let inputTextCandidate = autocompletion[0];
 
     	function handleKey() {
     		if (autocompletion.length > 0) {
-    			if (event.key == "ArrowUp") {
+    			if (event.key == "ArrowUp" && inputTextCandidate != autocompletion[0]) {
     				$$invalidate(3, inputTextCandidate = autocompletion[i]);
     				i -= 1;
-    			} else if (event.key == "ArrowDown") {
+    			} else if (event.key == "ArrowDown" && inputTextCandidate != autocompletion[autocompletion.length - 1]) {
     				$$invalidate(3, inputTextCandidate = autocompletion[i]);
     				i += 1;
     			} else if (event.keyCode == 13) {
